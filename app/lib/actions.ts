@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
+import { v4 as uuidv4 } from 'uuid';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -126,4 +127,31 @@ export async function authenticate(
         }
         throw error;
     }
+}
+
+
+const CustomerFormSchema = z.object({
+    id: z.string(),
+    name: z.string(),
+    email: z.string(),
+    image_url: z.string(),
+  });
+   
+  const AddCustomer = CustomerFormSchema.omit({ id: true });
+
+export async function addCustomer(formData: FormData) {
+    const { name, email, image_url } = AddCustomer.parse({
+        name: formData.get('name'),
+        email: formData.get('email'),
+        image_url: formData.get('image_url'),
+    });
+    const id = uuidv4();
+
+    await sql`
+    INSERT INTO customers (id, name, email, image_url)
+    VALUES (${id}, ${name}, ${email}, ${image_url})
+  `;
+
+  revalidatePath('/dashboard/customers');
+  redirect('/dashboard/customers');
 }
