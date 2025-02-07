@@ -155,3 +155,12 @@ export async function addCustomer(formData: FormData) {
   revalidatePath('/dashboard/customers');
   redirect('/dashboard/customers');
 }
+
+export async function deleteCustomer(id: string) {
+    await sql`
+        DELETE FROM customers
+        WHERE id = ${id}
+    `;
+
+    revalidatePath('/dashboard/customers');
+}

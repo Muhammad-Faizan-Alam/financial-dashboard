@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 
 import Search from '@/app/ui/search';
 import Table from '@/app/ui/customers/table';
-import { AddCustomer } from '@/app/ui/invoices/buttons';
+import { AddCustomer } from '@/app/ui/customers/buttons';
 import { lusitana } from '@/app/ui/fonts';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
