@@ -8,6 +8,7 @@ import {
 import { Button } from '@/app/ui/button';
 import { addCustomer } from '@/app/lib/actions';
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function Form() {
     const [imageUrl, setImageUrl] = useState("");
@@ -96,7 +97,13 @@ export default function Form() {
                     </div>
                     {imageUrl && (
                         <div className="mt-4">
-                            <img src={imageUrl} alt="Preview" className="h-32 w-32 rounded-md object-cover border" />
+                            <Image
+                                src={imageUrl}
+                                alt="Preview"
+                                width={128}
+                                height={128}
+                                className="rounded-md object-cover border"
+                            />
                         </div>
                     )}
                 </div>

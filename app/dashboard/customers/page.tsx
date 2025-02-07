@@ -8,7 +8,7 @@ import Search from '@/app/ui/search';
 import Table from '@/app/ui/customers/table';
 import { AddCustomer } from '@/app/ui/customers/buttons';
 import { lusitana } from '@/app/ui/fonts';
-import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
+import { CustomersTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 
 
@@ -30,7 +30,7 @@ export default async function Page(props: {
                 <Search placeholder="Search customers..." />
                 <AddCustomer />
             </div>
-            <Suspense key={query} fallback={<InvoicesTableSkeleton />}>
+            <Suspense key={query} fallback={<CustomersTableSkeleton />}>
                 <Table query={query} />
             </Suspense>
             {/* <div className="mt-5 flex w-full justify-center">
